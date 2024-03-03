@@ -29,8 +29,8 @@ fetchAllMovies().then(data => {
 
 galleryList.addEventListener('click', event => {
   const movieId = event.target.closest('.gallery__container').id;
-  const modalButtonWatched = document.querySelector('.modal__button-active');
-  const modalButtonQueue = document.querySelector('.modal__button');
+  const modalButtonWatched = document.getElementById('watched-list');
+  const modalButtonQueue = document.getElementById('queue-list');
 
   modalButtonWatched.dataset.movieId = movieId;
   modalButtonQueue.dataset.movieId = movieId;
@@ -41,15 +41,12 @@ galleryList.addEventListener('click', event => {
 fetchMovieDetails(1217605);
 */
 });
- document.addEventListener('click', event => {
-   
-  const movieId = event.target.closest('.modal').querySelector('.modal__button').dataset.movieId;
-  
-  if (event.target.matches('.modal__button-active')) {
-    console.log(movieId);
+document.addEventListener('click', event => {
+  if (event.target.matches('#watched-list')) {
+    const movieId = event.target.dataset.movieId;
     addToWatched(movieId);
-  } else if (event.target.matches('.modal__button')) {
-    console.log(movieId);
+  } else if (event.target.matches('#queue-list')) {
+    const movieId = event.target.dataset.movieId;
     addToQueue(movieId);
   }
 });
