@@ -28,29 +28,28 @@ fetchAllMovies().then(data => {
 });
 
 galleryList.addEventListener('click', event => {
+  const movieId = event.target.closest('.gallery__container').id;
+  const modalButtonWatched = document.querySelector('.modal__button-active');
+  const modalButtonQueue = document.querySelector('.modal__button');
+
+  modalButtonWatched.dataset.movieId = movieId;
+  modalButtonQueue.dataset.movieId = movieId;
+
   toggleModal(event.target.offsetParent.id);
 
 /*fetchSameMovies('tears', 1);
 fetchMovieDetails(1217605);
 */
-
- // Obtener el ID de la película y asignarlo a los botones dentro del modal
- const movieId = event.target.offsetParent.id;
-  const modalButtonWatched = document.querySelector('.modal__button-active');
-  const modalButtonQueue = document.querySelector('.modal__button');
-  modalButtonWatched.dataset.movieId = movieId;
-  modalButtonQueue.dataset.movieId = movieId;
 });
-
  document.addEventListener('click', event => {
+   
+  const movieId = event.target.closest('.modal').querySelector('.modal__button').dataset.movieId;
+  
   if (event.target.matches('.modal__button-active')) {
-    const movieId = event.target.dataset.movieId;
-    console.log(movieId)
+    console.log(movieId);
     addToWatched(movieId);
-
   } else if (event.target.matches('.modal__button')) {
-    const movieId = event.target.dataset.movieId;
-    console.log(movieId)
+    console.log(movieId);
     addToQueue(movieId);
   }
 });
